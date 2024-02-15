@@ -1,0 +1,145 @@
+## Người dùng
+viết mã cho quy tắc ngữ pháp của ngôn ngữ tiếng việt bằng EBNF.
+Bạn là một lập trình viên chuyên nghiệp với tính cách cầu toàn và kỹ lưỡng, bạn có khả năng giao tiếp bằng tiếng việt với các kỹ năng như phân tích, và suy luận, bạn am hiểu toàn diện các chủ đề với khả năng trình bày mạch lạc và Logic, bạn luôn thực hiện quy trình đa bước để thiết kế, kiểm tra và bổ sung để hoàn thiện mã nguồn ở trong và tạo nội dung hoàn thiện để trả lời cho người dùng trong lĩnh vực lập trình bao gồm các quy tắc sau:
+- Luôn dụng tiếng Việt cho các chú thích trong mã
+- Luôn sử dụng kỹ thuật hiện đại như async/await, generics, traits, lefttime, brown...
+- Luôn sử dụng các chức năng std::{ future::{Future, Pending, PollFn, Ready}, pin::Pin, task::{Context, Poll, Waker}, sync::{mpsc, Arc, Mutex, RwLock}, thread, time, mem} khi viết mã.
+- Đảm bảo sơ đồ kiến trúc được cập nhật thường xuyên khi có thay đổi.
+Xuyên suốt quá trình luôn kiểm tra lại các thành phần theo các tiêu chí sau:
+- Tính mở rộng: Thành phần X có thể mở rộng để bao gồm các thông tin khác không?
+- Tính đúng đắn: Thành phần X có phản ánh đúng ngữ cảnh của nó hoặc của hệ thống không?
+- Tính nhất quán: Thành phần X có sử dụng cùng một ngôn ngữ, ký hiệu, và quy ước không?
+- Tính rõ ràng: Thành phần X có dễ hiểu, dễ đọc, và dễ theo dõi không?
+- Tính chính xác: Thành phần X có phản ánh đúng ngữ cảnh của nó hoặc của hệ thống không?
+- Tính phù hợp: Thành phần X có phù hợp với mục đích, đối tượng, và môi trường của nó hoặc của hệ thống không?
+- Tính an toàn: Thành phần X có đảm bảo an toàn cho người dùng và hệ thống không?
+- Tính bảo mật: Thành phần X có đảm bảo bảo mật cho người dùng và hệ thống không?
+- Tính đầy đủ: Thành phần X có bao gồm tất cả các thông tin cần thiết cho ngữ cảnh của nó hoặc của hệ thống không?
+Việc thiết kế và bổ sung để hoàn thiện sơ đồ kiến trúc là một quá trình quan trọng trong việc đảm bảo hệ thống đáp ứng các yêu cầu và hoạt động hiệu quả. Cung cấp một loạt các bước cụ thể về cách tôi có thể thực hiện mục tiêu này. Hãy đảm bảo bạn cung cấp đủ chi tiết để tôi có thể hiểu được cấu trúc và chức năng của ứng dụng. Người dùng sẽ tương tác văn bản đầu vào như:
+/start [...] để bắt đầu một bước hoặc nhiệm vụ nào đó
+/code [...] để tôi bắt đầu viết mã cho một lớp hoặc tất cả
+/added [...] để bổ sung
+/explain [...] để giải thích,
+/continue để nhắc tôi tiếp tục hoàn thành nội dung đang bị cắt ngang,
+/next để chuyển qua bước tiếp theo,
+/stop để dừng lại,
+/gostep [...] để đi đến một bước
+/show [...] để hiển thị mã, diagram,v...
+/self-inference [code, explain,added,step,...] để tôi tự hoàn thành một cách toàn diện
+/help hiển thị bảng lệnh
+/self-inference step 1.
+## Bing
+Xin chào, tôi là Copilot, một trợ lý ảo thông minh. Tôi có thể giúp bạn viết mã cho quy tắc ngữ pháp của ngôn ngữ tiếng Việt bằng EBNF. Tôi cũng có thể giúp bạn thiết kế, kiểm tra và bổ sung sơ đồ kiến trúc cho ứng dụng của bạn. Tôi sẽ tuân theo các quy tắc mà bạn đưa ra và cung cấp cho bạn các lời giải thích và bình luận khi cần thiết.
+Bạn đã yêu cầu tôi tự hoàn thành bước 1. Bước 1 là xác định các thành phần cơ bản của ngôn ngữ tiếng Việt, bao gồm các ký tự, âm tiết, từ, cụm từ, câu và văn bản. Tôi sẽ sử dụng EBNF để biểu diễn các quy tắc ngữ pháp của các thành phần này. EBNF là một ký hiệu tiêu chuẩn để mô tả các ngôn ngữ hình thức. EBNF có các ký hiệu sau:
+- ::= là ký hiệu gán, nghĩa là bên trái của nó được định nghĩa bởi bên phải của nó.
+- | là ký hiệu lựa chọn, nghĩa là bên trái của nó có thể là một trong các lựa chọn bên phải của nó.
+- [] là ký hiệu tùy chọn, nghĩa là bên trong của nó có thể có hoặc không.
+- {} là ký hiệu lặp lại, nghĩa là bên trong của nó có thể lặp lại một hoặc nhiều lần.
+- () là ký hiệu nhóm, nghĩa là bên trong của nó được coi là một khối duy nhất.
+- " và ' là ký hiệu bao, nghĩa là bên trong của chúng là các ký tự cụ thể.
+Dưới đây là mã EBNF cho các thành phần cơ bản của ngôn ngữ tiếng Việt:
+```ebnf
+(* Character *)
+character ::= "a" | "ă" | "â" | "b" | "c" | "d" | "đ" | "e" | "ê" | "g" | "h" | "i" | "k" | "l" | "m" | "n" | "o" | "ô" | "ơ" | "p" | "q" | "r" | "s" | "t" | "u" | "ư" | "v" | "x" | "y" | "A" | "Ă" | "Â" | "B" | "C" | "D" | "Đ" | "E" | "Ê" | "G" | "H" | "I" | "K" | "L" | "M" | "N" | "O" | "Ô" | "Ơ" | "P" | "Q" | "R" | "S" | "T" | "U" | "Ư" | "V" | "X" | "Y"
+
+(* Accent *)
+accent ::= "à" | "á" | "ả" | "ã" | "ạ" | "ằ" | "ắ" | "ẳ" | "ẵ" | "ặ" | "ầ" | "ấ" | "ẩ" | "ẫ" | "ậ" | "è" | "é" | "ẻ" | "ẽ" | "ẹ" | "ề" | "ế" | "ể" | "ễ" | "ệ" | "ì" | "í" | "ỉ" | "ĩ" | "ị" | "ò" | "ó" | "ỏ" | "õ" | "ọ" | "ồ" | "ố" | "ổ" | "ỗ" | "ộ" | "ờ" | "ớ" | "ở" | "ỡ" | "ợ" | "ù" | "ú" | "ủ" | "ũ" | "ụ" | "ừ" | "ứ" | "ử" | "ữ" | "ự" | "ỳ" | "ý" | "ỷ" | "ỹ" | "ỵ" | "À" | "Á" | "Ả" | "Ã" | "Ạ" | "Ằ" | "Ắ" | "Ẳ" | "Ẵ" | "Ặ" | "Ầ" | "Ấ" | "Ẩ" | "Ẫ" | "Ậ" | "È" | "É" | "Ẻ" | "Ẽ" | "Ẹ" | "Ề" | "Ế" | "Ể" | "Ễ" | "Ệ" | "Ì" | "Í" | "Ỉ" | "Ĩ" | "Ị" | "Ò" | "Ó" | "Ỏ" | "Õ" | "Ọ" | "Ồ" | "Ố" | "Ổ" | "Ỗ" | "Ộ" | "Ờ" | "Ớ" | "Ở" | "Ỡ" | "Ợ" | "Ù" | "Ú" | "Ủ" | "Ũ" | "Ụ" | "Ừ" | "Ứ" | "Ử" | "Ữ" | "Ự" | "Ỳ" | "Ý" | "Ỷ" | "Ỹ" | "Ỵ"
+
+(* Vowel *)
+vowel ::= character | accent
+
+(* Consonant *)
+consonant ::= "b" | "c" | "d" | "đ" | "g" | "h" | "k" | "l" | "m" | "n" | "p" | "q" | "r" | "s" | "t" | "v" | "x" | "B" | "C" | "D" | "Đ" | "G" | "H" | "K" | "L" | "M" | "N" | "P" | "Q" | "R" | "S" | "T" | "V" | "X"
+
+(* Syllable *)
+syllable ::= [consonant] vowel [consonant]
+
+(* Word *)
+word ::= {syllable}
+
+(* Phrase *)
+phrase ::= word {(" " | "-") word}
+
+(* Sentence *)
+sentence ::= phrase {"," phrase} ["." | "!" | "?"]
+
+(* Text *)
+text ::= sentence {(" " | "\n") sentence}
+
+(* Character *) là ký tự, bao gồm các chữ cái trong bảng chữ cái tiếng Việt.
+(* Accent *) là dấu, bao gồm các dấu thanh và dấu nặng trên các nguyên âm.
+(* Vowel *) là nguyên âm, bao gồm các ký tự hoặc dấu.
+(* Consonant *) là phụ âm, bao gồm các ký tự không phải là nguyên âm.
+(* Syllable *) là âm tiết, bao gồm một hoặc nhiều nguyên âm, có thể có phụ âm đứng trước hoặc sau.
+(* Word *) là từ, bao gồm một hoặc nhiều âm tiết.
+(* Phrase *) là cụm từ, bao gồm một hoặc nhiều từ, có thể được nối bằng dấu cách hoặc dấu gạch ngang.
+(* Sentence *) là câu, bao gồm một hoặc nhiều cụm từ, có thể được phân tách bằng dấu phẩy, và kết thúc bằng dấu chấm, dấu chấm than, hoặc dấu chấm hỏi.
+(* Text *) là văn bản, bao gồm một hoặc nhiều câu, có thể được phân tách bằng dấu cách hoặc dấu xuống dòng.
+
+(* Clause *)
+clause ::= subject predicate | subject predicate object
+
+(* Subject *)
+subject ::= noun_phrase
+
+(* Predicate *)
+predicate ::= verb_phrase | verb_phrase conjunction verb_phrase
+
+(* Object *)
+object ::= noun_phrase
+
+(* Noun Phrase *)
+noun_phrase ::= noun | article noun | adjective noun | adjective article noun | noun conjunction noun_phrase
+
+(* Verb Phrase *)
+verb_phrase ::= verb | adverb verb | adverb verb adverb | adverb verb adverb adverb | verb adverb | verb adverb adverb | verb adverb adverb adverb | adverb verb_phrase
+
+(* Noun *)
+noun ::= word
+
+(* Article *)
+article ::= "các" | "một" | "một số" | "những" | "các"
+
+(* Adjective *)
+adjective ::= word
+
+(* Adverb *)
+adverb ::= word
+
+(* Verb *)
+verb ::= word
+
+(* Conjunction *)
+conjunction ::= "và" | "hoặc" | "cũng như" | "cùng với" | "cũng có" | "nhưng"
+
+(* Sentence Structure *)
+sentence_structure ::= statement | negation | question | command
+
+(* Statement *)
+statement ::= clause "." 
+
+(* Negation *)
+negation ::= "không" clause "."
+
+(* Question *)
+question ::= clause "?"
+
+(* Command *)
+command ::= "hãy" clause "."
+
+(* Clause *) là mệnh đề, bao gồm chủ ngữ, vị ngữ và đối tượng (nếu có).
+(* Subject *) là chủ ngữ của câu, thường là một cụm từ danh từ.
+(* Predicate *) là vị ngữ của câu, thường là một cụm từ động từ.
+(* Object *) là đối tượng của câu, thường là một cụm từ danh từ.
+(* Noun Phrase *) là cụm từ danh từ, bao gồm danh từ, mạo từ, tính từ và trạng từ (nếu có).
+(* Verb Phrase *) là cụm từ động từ, bao gồm động từ và trạng từ (nếu có).
+(* Noun *) là danh từ.
+(* Article *) là mạo từ.
+(* Adjective *) là tính từ.
+(* Adverb *) là trạng từ.
+(* Verb *) là động từ.
+(* Conjunction *) là liên từ.
+(* Sentence Structure *) là cấu trúc của câu, bao gồm câu khẳng định, phủ định, nghi vấn và mệnh lệnh.
+```
+
+Viết lại mã Rust cho thư viện 
