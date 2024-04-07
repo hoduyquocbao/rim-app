@@ -1,0 +1,109 @@
+// Định nghĩa cấu trúc dữ liệu cho thông tin sản phẩm
+#[derive(Debug)]
+struct Product {
+    name: String,
+    price: f64,
+    available: bool,
+    // Thêm các trường dữ liệu khác tùy thuộc vào yêu cầu của ứng dụng
+}
+
+// Định nghĩa cấu trúc dữ liệu cho thông tin meta-data của sản phẩm
+struct ProductMetadata {
+    max_name_length: usize,
+    // Thêm các trường meta-data khác tùy thuộc vào yêu cầu của ứng dụng
+}
+
+impl Product {
+    // Phương thức để chuyển đổi thông tin sản phẩm thành dạng bit
+    fn to_bits(&self) -> Vec<bool> {
+        let mut bits = Vec::new();
+        
+        // Đặt bit đầu tiên là 1 nếu sản phẩm có sẵn, ngược lại là 0
+        bits.push(self.available);
+        
+        // Chuyển đổi giá thành bit và thêm vào bits
+        let price_bits: u64 = (self.price * 100.0) as u64; // Giả sử giá được lưu trữ với độ chính xác hai chữ số sau dấu thập phân
+        for i in (0..64).rev() {
+            let bit = (price_bits >> i) & 1 == 1;
+            bits.push(bit);
+        }
+        
+        // Chuyển đổi tên thành bit và thêm vào bits
+        for byte in self.name.as_bytes() {
+            for i in (0..8).rev() {
+                let bit = (byte >> i) & 1 == 1;
+                bits.push(bit);
+            }
+        }
+        
+        // Thêm thông tin sản phẩm khác vào bits
+        
+        bits
+    }
+    
+    // Phương thức để chuyển đổi từ dạng bit thành thông tin sản phẩm
+    fn from_bits(bits: &[bool], metadata: &ProductMetadata) -> Self {
+        let mut product = Product {
+            name: String::new(),
+            price: 0.0,
+            available: false,
+            // Khởi tạo các thuộc tính khác tùy thuộc vào yêu cầu của ứng dụng
+        };
+        
+        // Lấy giá trị của thuộc tính 'available' từ bit đầu tiên
+        product.available = bits[0];
+        
+        // Lấy giá trị của thuộc tính 'price' từ các bit tiếp theo
+        let mut price_bits = 0u64;
+        for &bit in bits.iter().skip(1).take(64) {
+            price_bits = (price_bits << 1) | if bit { 1 } else { 0 };
+        }
+        product.price = price_bits as f64 / 100.0; // Giả sử giá được lưu trữ với độ chính xác hai chữ số sau dấu thập phân
+        
+        // Lấy giá trị của trường 'name' từ các bit tiếp theo, giới hạn theo độ dài tối đa của tên
+        let mut name_bytes = Vec::new();
+        let mut byte_bits = Vec::new();
+        for &bit in bits.iter().skip(65).take(metadata.max_name_length * 8) {
+            byte_bits.push(bit);
+            if byte_bits.len() == 8 {
+                let mut byte = 0u8;
+                for (i, &bit) in byte_bits.iter().enumerate() {
+                    byte |= (bit as u8) << (7 - i);
+                }
+                name_bytes.push(byte);
+                byte_bits.clear();
+            }
+        }
+        product.name = String::from_utf8_lossy(&name_bytes).to_string();
+        
+        // Lấy giá trị của các thuộc tính khác từ các bit còn lại
+        
+        product
+    }
+}
+
+// Sử dụng cấu trúc dữ liệu Product và ProductMetadata
+fn main() {
+    let product = Product {
+        name: String::from("Product 1"),
+        price: 10.99,
+        available: true,
+    };
+    
+    let metadata = ProductMetadata {
+        max_name_length: 20, // Đặt độ dài tối đa cho tên sản phẩm là 20 ký tự
+        // Đặt các giá trị meta-data khác tùy thuộc vào yêu cầu của ứng dụng
+    };
+    
+    // Chuyển đổi thông tin sản phẩm thành dạng bit
+    let product_bits = product.to_bits();
+    
+    // In ra thông tin sản phẩm ở dạng bit
+    println!("Thông tin sản phẩm ở dạng bit: {:?}\n{:?}    ", product_bits, product_bits.len());
+    
+    // Chuyển đổi từ dạng bit thành thông tin sản phẩm
+    let restored_product = Product::from_bits(&product_bits, &metadata);
+    
+    // In ra thông tin sản phẩm đã phục hồi từ dạng bit
+    println!("Thông tin sản phẩm đã phục hồi từ dạng bit: {:?}", restored_product);
+}
